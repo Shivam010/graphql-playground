@@ -1,0 +1,14 @@
+[build]
+    publish = "build/"
+    command = "yarn build-app"
+
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+
+[[headers]]
+    for = "/*.graphql"
+    [headers.values]
+        Content-Type = "text/plain"
+        Access-Control-Allow-Origin = "*"
