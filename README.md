@@ -3,6 +3,7 @@
 GraphQL IDE for better development workflows (GraphQL Subscriptions, interactive docs & collaboration). <br />
 **You can try and use the web version at https://gql.rathore.ml/**
 
+[![build](https://github.com/Shivam010/graphql-playground/actions/workflows/ci.yml/badge.svg)](https://github.com/Shivam010/graphql-playground/actions/workflows/ci.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/113df349-9512-4935-834e-f54f7e208689/deploy-status)](https://gql.netlify.app/)
 
 This is a fork of an old commit from https://github.com/graphcool/graphql-playground, along with certain changes to handle some use-cases, like saved workspaces suggestions on the first page etc.
