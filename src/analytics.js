@@ -1,14 +1,14 @@
-export const track = (title, path) => {
+function track(title, path) {
   if (!title) title = "";
-  console.log(title);
   if (!path) path = title;
+  console.log(title, path);
   window.goatcounter.count({
     path: location.pathname + "#" + path,
     title: title !== "" ? title : document.title,
   });
-};
+}
 
-export const useAnalytics = () => {
+function useAnalytics() {
   window.goatcounter = {
     no_onload: true,
     allow_local: true,
@@ -17,7 +17,7 @@ export const useAnalytics = () => {
   };
   goatCounterFunction();
   track();
-};
+}
 
 // GoatCounter: https://www.goatcounter.com
 // goatCounterFunction function (and *only* goatCounterFunction function) is released under the ISC license:
