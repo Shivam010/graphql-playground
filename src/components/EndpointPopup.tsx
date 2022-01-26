@@ -6,6 +6,7 @@ import { Button } from './Button'
 import { styled, css } from '../styled'
 import { deserializeState } from '../state/localStorage'
 import { RootState } from '../state/workspace/reducers'
+import { useAnalytics, track } from '../analytics'
 
 export interface Props {
   onRequestClose: (endpoint: string) => void
@@ -19,7 +20,6 @@ export interface State {
 }
 
 export default class EndpointPopup extends React.Component<Props, State> {
-
   checkEndpoint = throttle(() => {
     if (this.state.endpoint.match(/^https?:\/\/\w+(\.\w+)*(:[0-9]+)?\/?.*$/)) {
       fetch(this.state.endpoint, {
@@ -55,11 +55,12 @@ export default class EndpointPopup extends React.Component<Props, State> {
 
   componentDidMount() {
     this.checkEndpoint()
+    useAnalytics()
   }
 
   render() {
     const { valid } = this.state
-    const list = this.savedEndpoints();
+    const list = this.savedEndpoints()
     return (
       <Popup onRequestClose={this.close} darkBg={true}>
         <Wrapper>
@@ -89,16 +90,20 @@ export default class EndpointPopup extends React.Component<Props, State> {
 
           <Group>
             <Message>
-              {list.length > 0 ? "Your saved workspaces:" : "You don't have any saved workspaces."}
+              {list.length > 0
+                ? 'Your saved workspaces:'
+                : "You don't have any saved workspaces."}
             </Message>
             {list.map((st, i) => {
               const select = e => {
-                this.state = st;
-                this.close();
+                this.state = st
+                this.close()
               }
-              return <Item key={i} onClick={select}>
-                {st.endpoint}
-              </Item>
+              return (
+                <Item key={i} onClick={select}>
+                  {st.endpoint}
+                </Item>
+              )
             })}
           </Group>
         </Wrapper>
@@ -122,18 +127,19 @@ export default class EndpointPopup extends React.Component<Props, State> {
   private close = () => {
     if (this.state.valid) {
       this.props.onRequestClose(this.state.endpoint)
+      track(this.state.endpoint)
     }
   }
 
   private savedEndpoints = () => {
     const state: RootState = deserializeState()
 
-    const list: State[] = [];
+    const list: State[] = []
     if (state) {
       /* tslint:disable-next-line */
-      console.log("Saved state", state.workspaces.size);
+      console.log('Saved state', state.workspaces.size)
       state.workspaces.forEach((ws, url) => {
-        if (url !== "") {
+        if (url !== '') {
           list.push({
             endpoint: url,
             valid: true,
@@ -143,9 +149,9 @@ export default class EndpointPopup extends React.Component<Props, State> {
       })
     } else {
       /* tslint:disable-next-line */
-      console.log("No saved workspaces state")
+      console.log('No saved workspaces state')
     }
-    return list;
+    return list
   }
 }
 
