@@ -23,6 +23,7 @@ import {
 import EditorWrapper from './EditorWrapper'
 import { styled } from '../../styled'
 import { isIframe } from '../../utils'
+import { track } from '../../analytics'
 /**
  * QueryEditor
  *
@@ -145,11 +146,13 @@ export class QueryEditor extends React.PureComponent<Props & ReduxProps, {}> {
         'Cmd-Enter': () => {
           if (this.props.onRunQuery) {
             this.props.onRunQuery()
+            track('Query Run', 'query')
           }
         },
         'Ctrl-Enter': () => {
           if (this.props.onRunQuery) {
             this.props.onRunQuery()
+            track('Query Run', 'query')
           }
         },
 

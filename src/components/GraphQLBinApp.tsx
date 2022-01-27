@@ -53,8 +53,7 @@ class GraphQLBinApp extends React.Component<Props & ReduxProps, State> {
     }
   }
 
-  componentWillMount() {
-  }
+  componentWillMount() {}
 
   render() {
     let { endpoint, subscriptionEndpoint } = this.state
@@ -69,7 +68,7 @@ class GraphQLBinApp extends React.Component<Props & ReduxProps, State> {
     return (
       <Wrapper>
         {this.state.loading ? null : !this.state.endpoint ||
-          this.state.endpoint.length === 0 ? (
+        this.state.endpoint.length === 0 ? (
           <ThemeProvider theme={styledTheme}>
             <EndpointPopup
               onRequestClose={this.handleChangeEndpoint}

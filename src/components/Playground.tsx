@@ -9,6 +9,7 @@ import { PlaygroundSettingsEditor, GraphQLConfigEditor } from './SettingsEditor'
 import { GraphQLConfig } from '../graphqlConfig'
 import FileEditor from './FileEditor'
 import { ApolloLink } from 'apollo-link'
+import { track } from '../analytics'
 
 import * as app from '../../package.json'
 import { connect } from 'react-redux'
@@ -353,6 +354,7 @@ export class Playground extends React.PureComponent<Props & ReduxProps, State> {
       this.props.endpoint,
       this.props.settings['editor.reuseHeaders'],
     )
+    track('Add New session', 'addSession')
   }
 
   private updateSchema(

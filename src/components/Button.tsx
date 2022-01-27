@@ -10,7 +10,13 @@ export interface Props {
   onClick?: (e?: any) => void
 }
 
-export const Button = ({ purple, textTransform, hideArrow, children, onClick }: Props) => (
+export const Button = ({
+  purple,
+  textTransform,
+  hideArrow,
+  children,
+  onClick,
+}: Props) => (
   <ButtonBox purple={purple} onClick={onClick} textTransform={textTransform}>
     {children ? children : 'Learn more'}
     {!hideArrow && <FullArrowRightIcon color={'red'} width={14} height={11} />}
@@ -42,7 +48,7 @@ export const ButtonBox = styled<ButtonProps, 'div'>('div')`
   &:hover {
     background: ${p => (p.purple ? 'rgb(164, 3, 111)' : '#3f8ad7')};
     transform: ${p =>
-    p.purple ? 'translate3D(0, 0, 0)' : 'translate3D(0, -1px, 0)'};
+      p.purple ? 'translate3D(0, 0, 0)' : 'translate3D(0, -1px, 0)'};
     svg {
       animation: move 1s ease infinite;
     }

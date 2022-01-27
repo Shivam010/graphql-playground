@@ -18,6 +18,7 @@ import {
   getSelectedSessionIdFromRoot,
 } from '../../state/sessions/selectors'
 import { toJS } from './util/toJS'
+import { track } from '../../analytics'
 
 export interface ReduxProps {
   runQuery: (operationName?: string) => void
@@ -134,6 +135,7 @@ class ExecuteButton extends React.Component<ReduxProps, State> {
       this.props.stopQuery(this.props.sessionId)
     } else {
       this.props.runQuery()
+      track('Query Run', 'query')
     }
   }
 
@@ -143,6 +145,7 @@ class ExecuteButton extends React.Component<ReduxProps, State> {
       return
     }
     this.props.runQuery(operation.name && operation.name.value)
+    track('Query Run', 'query')
   }
 
   private onOptionsOpen = downEvent => {
