@@ -1,4 +1,4 @@
-function track(title, path) {
+export function track(title, path) {
   if (!title) title = "";
   if (!path) path = title;
   console.log(title, path);
@@ -8,7 +8,7 @@ function track(title, path) {
   });
 }
 
-function useAnalytics() {
+export function useAnalytics() {
   window.goatcounter = {
     no_onload: true,
     allow_local: true,
